@@ -1,16 +1,16 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var compression = require('compression');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const compression = require('compression');
 
 
-var indexRouter = require('./controllers/index');
+const indexRouter = require('./controllers/index');
 
-var app = express();
+const app = express();
 if (process.env.NODE_ENV === 'production') {
-    app.disable('x-powered-by');
-    app.use(compression())
+  app.disable('x-powered-by');
+  app.use(compression());
 }
 app.use(logger('dev'));
 app.use(express.json());
@@ -19,7 +19,5 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-
-
 
 module.exports = app;
